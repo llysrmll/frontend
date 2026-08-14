@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Your Item - KapwaHiram</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="rental.html">Rentals</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="chatbox.html">Messages</a>
+      <a href="profile.html">Profile</a>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-chat-input">
+        <input id="navChatInput" type="text" placeholder="Ask chat...">
+        <button type="button" id="navChatButton">➤</button>
+      </div>
+      <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="page-actions">
+      <button type="button" id="rentalMyListingsBtn">My Listings</button>
+      <button type="button" id="rentalViewMessagesBtn">View Messages</button>
+      <button type="button" id="rentalNotificationsBtn">Notifications</button>
+    </div>
+    <div class="listings-panel">
+      <h3>Saved Listings</h3>
+      <ul id="rentalListings"></ul>
+    </div>
+    <h2>List Your Item for Rent</h2>
+    <form id="rentalForm">
+      <input type="text" placeholder="Item Name" required>
+      <input type="text" placeholder="Category" required>
+      <textarea placeholder="Description" required></textarea>
+      <input type="file" accept="image/*">
+      <label><input type="checkbox" required> Agree to Rental Terms</label>
+      <label><input type="checkbox" required> Verify Item Condition</label>
+      <button type="submit">Submit for Review</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

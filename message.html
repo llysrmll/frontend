@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Chat - KapwaHiram</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <a href="home.html">Home</a>
+    <a href="rental.html">Rentals</a>
+    <a href="chatbox.html">Messages</a>
+    <a href="profile.html">Profile</a>
+    <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
+  </nav>
+  <div class="container chat-layout">
+    <aside class="side-panel">
+      <h3>Admin Support</h3>
+      <p>Use this chat to connect directly with the admin for listing approval, questions, and updates.</p>
+      <div class="notification-list">
+        <h4>Support Status</h4>
+        <ul>
+          <li>Admin online<span>Now</span></li>
+          <li>Typical response<span>1-2 min</span></li>
+          <li>Open support hours<span>8am - 9pm</span></li>
+        </ul>
+      </div>
+    </aside>
+    <div class="chatbox chatbox-with-info">
+      <div class="chat-header">
+        <div class="chat-avatar">A</div>
+        <div class="chat-info">
+          <h2>Admin Messenger</h2>
+          <span>Chat directly with the support team</span>
+        </div>
+        <div class="chat-user-actions">
+          <span class="chat-user-name">You</span>
+          <button type="button" class="chat-action-button" onclick="location.href='profile.html'">My Profile</button>
+        </div>
+      </div>
+      <div class="chat-window">
+        <div class="message bot">
+          <div class="message-text">Hello! This is the admin support channel. How can we help you today?</div>
+        </div>
+        <div class="message user">
+          <div class="message-text">Hi, I need assistance with my new rental listing.</div>
+        </div>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <input type="text" placeholder="Type a message to admin..." aria-label="Message to admin" required>
+        <button type="submit">→</button>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KapwaHiram - Clothing Delivery</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .delivery-form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .delivery-form h3 {
+      margin-top: 0;
+    }
+    .delivery-form input, .delivery-form select, .delivery-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .delivery-form button {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .delivery-form button:hover {
+      background: #0056b3;
+    }
+    .delivery-list {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .delivery-item {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      transition: background-color 0.3s ease;
+    }
+    .delivery-item:hover {
+      background-color: #f8f9fa;
+      border-radius: 4px;
+    }
+    .delivery-item:last-child {
+      border-bottom: none;
+    }
+    .search-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .search-btn:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="rental.html">Rentals</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="chatbox.html">Messages</a>
+      <a href="profile.html">Profile</a>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-chat-input">
+        <input id="navChatInput" type="text" placeholder="Ask chat...">
+        <button type="button" id="navChatButton">➤</button>
+      </div>
+      <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
+    </div>
+  </nav>
+  <section class="home-search">
+    <input id="homeSearchInput" type="text" placeholder="Search clothing deliveries or locations">
+    <button type="button" id="homeSearchBtn">Search</button>
+    <button type="button" class="home-search-chat" onclick="location.href='chatbox.html'">Messages</button>
+  </section>
+  <main class="dashboard">
+    <div class="delivery-form">
+      <h3>Schedule Clothing Delivery</h3>
+      <form id="deliveryForm">
+        <div style="display: flex; align-items: center;">
+          <input type="text" id="pickupAddress" placeholder="Pickup Address (Tailor/Store)" required style="flex: 1;">
+          <button type="button" class="search-btn" onclick="searchAddress(document.getElementById('pickupAddress').value)">Search</button>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <input type="text" id="deliveryAddress" placeholder="Delivery Address (Event Venue/Customer)" required style="flex: 1;">
+          <button type="button" class="search-btn" onclick="searchAddress(document.getElementById('deliveryAddress').value)">Search</button>
+        </div>
+        <input type="datetime-local" id="pickupTime" required>
+        <select id="itemType">
+          <option value="">Select Clothing Type</option>
+          <option value="tuxedo">Tuxedo</option>
+          <option value="gown">Gown for Event</option>
+          <option value="suit">Formal Suit</option>
+          <option value="dress">Evening Dress</option>
+          <option value="costume">Costume</option>
+          <option value="other">Other</option>
+        </select>
+        <textarea id="notes" placeholder="Additional notes"></textarea>
+        <button type="submit">Schedule Delivery</button>
+      </form>
+    </div>
+    <div id="map"></div>
+    <div class="delivery-list">
+      <h3>Your Clothing Deliveries</h3>
+      <div id="deliveryList">
+        <!-- Clothing deliveries will be listed here -->
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
