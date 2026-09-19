@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>List Your Item - KapwaHiram</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rentals - StyliCycle</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="rental-page">
   <nav class="top-nav">
     <div class="nav-links">
       <a href="home.html">Home</a>
-      <a href="rental.html">Rentals</a>
+      <a href="rental.html" class="active">Rentals</a>
       <a href="delivery.html">Delivery</a>
       <a href="chatbox.html">Messages</a>
       <a href="profile.html">Profile</a>
@@ -22,27 +23,56 @@
       <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
     </div>
   </nav>
-  <div class="container">
-    <div class="page-actions">
-      <button type="button" id="rentalMyListingsBtn">My Listings</button>
-      <button type="button" id="rentalViewMessagesBtn">View Messages</button>
-      <button type="button" id="rentalNotificationsBtn">Notifications</button>
+
+  <main class="rental-page-content">
+    <div class="rental-card">
+      <div class="page-actions">
+        <button type="button" id="rentalMyListingsBtn">My Listings</button>
+        <button type="button" id="rentalViewMessagesBtn">View Messages</button>
+        <button type="button" id="rentalNotificationsBtn">Notifications</button>
+      </div>
+
+      <div class="rental-layout">
+        <section class="listings-panel">
+          <h3>Saved Listings</h3>
+          <ul id="rentalListings"></ul>
+        </section>
+
+        <section class="rental-form-section">
+          <h1>List your item for rent</h1>
+          <p class="subtitle">Share your dress, suit, or accessory with trusted event renters.</p>
+
+          <form id="rentalForm" class="rental-form">
+            <label class="field-group">
+              <span>Item Name</span>
+              <input type="text" placeholder="Wedding gown, tuxedo, accent piece" required>
+            </label>
+
+            <label class="field-group">
+              <span>Category</span>
+              <input type="text" placeholder="Bridal, formalwear, accessory" required>
+            </label>
+
+            <label class="field-group">
+              <span>Description</span>
+              <textarea placeholder="Describe the fit, condition, colors, and rental details" required></textarea>
+            </label>
+
+            <label class="field-group file-field">
+              <span>Upload Photo</span>
+              <input type="file" accept="image/*">
+            </label>
+
+            <label class="check-row"><input type="checkbox" required> Agree to Rental Terms</label>
+            <label class="check-row"><input type="checkbox" required> Verify Item Condition</label>
+
+            <button type="submit" class="primary-button">Submit for Review</button>
+          </form>
+        </section>
+      </div>
     </div>
-    <div class="listings-panel">
-      <h3>Saved Listings</h3>
-      <ul id="rentalListings"></ul>
-    </div>
-    <h2>List Your Item for Rent</h2>
-    <form id="rentalForm">
-      <input type="text" placeholder="Item Name" required>
-      <input type="text" placeholder="Category" required>
-      <textarea placeholder="Description" required></textarea>
-      <input type="file" accept="image/*">
-      <label><input type="checkbox" required> Agree to Rental Terms</label>
-      <label><input type="checkbox" required> Verify Item Condition</label>
-      <button type="submit">Submit for Review</button>
-    </form>
-  </div>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
