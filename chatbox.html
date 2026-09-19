@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chatbot Assistance - KapwaHiram</title>
+  <title>StyliCycle - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,43 +22,47 @@
       <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
     </div>
   </nav>
-  <div class="container chat-layout">
+  <section class="home-search">
+    <input id="homeSearchInput" type="text" placeholder="Search rentals, partners, or updates">
+    <button type="button" id="homeSearchBtn">Search</button>
+    <button type="button" class="home-search-chat" onclick="location.href='chatbox.html'">Messages</button>
+  </section>
+  <main class="dashboard home-grid">
     <aside class="side-panel">
-      <h3>Notifications</h3>
-      <button type="button" id="chatViewAllBtn">View All</button>
-      <button type="button" id="chatNewReqBtn">New Request</button>
-      <button type="button" id="chatPostItemBtn">Post Item</button>
+      <h3>Quick Actions</h3>
+      <button type="button" id="homePostRentalBtn">Post Rental</button>
+      <button type="button" id="homeOpenMessagesBtn">User Messages</button>
+      <button type="button" id="homeOpenAdminChatBtn">Admin Support</button>
+      <button type="button" id="homeViewNotificationsBtn">View Notifications</button>
+      <div id="homeNotificationInfo" class="notification-info hidden"></div>
+      <div class="create-post">
+        <h4>Create a Post</h4>
+        <textarea id="postContent" placeholder="Share your thoughts or updates..."></textarea>
+        <input type="file" id="postImage" accept="image/*" style="display: none;">
+        <button type="button" id="imageUploadBtn" class="image-upload-btn">📷 Upload Image</button>
+        <button type="button" id="submitPostBtn">Post</button>
+      </div>
       <div class="notification-list">
-        <h4>Recent</h4>
-        <ul id="chatNotifications"></ul>
+        <h4>Recent Alerts</h4>
+        <ul id="homeNotifications"></ul>
       </div>
     </aside>
-    <div class="chatbox chatbox-with-info">
-      <div class="chat-header">
-        <div class="chat-avatar">B</div>
-        <div class="chat-info">
-          <h2>User Messages</h2>
-          <span>Connect with support or view your recent chats</span>
-        </div>
-        <div class="chat-user-actions">
-          <span class="chat-user-name">User: Event Partner</span>
-          <button type="button" class="chat-action-button">New Chat</button>
+    <section class="card store-suggestion-card">
+      <div class="suggestion-images">
+        <img src="gold.jpg" alt="Event suit rental suggestion">
+        <div class="suggestion-thumbs">
+          <img src="tuxedo.jpg" alt="Tuxedo suit rental">
+          <img src="evening.jpg" alt="Evening gown rental">
+          <img src="bridal.jpg" alt="Bridal gown rental">
         </div>
       </div>
-      <div class="chat-window">
-        <div class="message bot">
-          <div class="message-text">Hi! How can I assist you today?</div>
-        </div>
-        <div class="message user">
-          <div class="message-text">Admin is currently unavailable. You can post your rental item below.</div>
-        </div>
+      <div class="store-suggestion-content">
+        <h3>Suggested Rental Idea</h3>
+        <p>Discover event-ready suits and gowns for weddings, parties, and formal occasions. Browse our most popular rental looks for your next celebration.</p>
+        <button type="button" onclick="location.href='rental.html'">Browse Rentals</button>
       </div>
-      <form class="chat-form" id="chatForm">
-        <input type="text" placeholder="Type a message..." autocomplete="off">
-        <button type="submit">➤</button>
-      </form>
-    </div>
-  </div>
+    </section>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
