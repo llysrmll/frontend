@@ -63,7 +63,7 @@ document.getElementById("loginForm")?.addEventListener("submit", function(e) {
   const password = document.getElementById("password").value;
   const agreeTermsLogin = document.getElementById("agreeTermsLogin")?.checked;
 
-  if (!agreeTermsLogin) {
+  if (agreeTermsLogin === false) {
     alert("Please agree to the Terms and Conditions before logging in.");
     return;
   }
