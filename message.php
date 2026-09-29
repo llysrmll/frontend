@@ -1,0 +1,76 @@
+<?php
+require_once __DIR__ . '/config.php';
+requireLogin();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Chat - StyliCycle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-message-page">
+  <nav class="top-nav">
+    <div class="nav-links">
+      <a href="home.php">Home</a>
+      <a href="rental.php">Rentals</a>
+      <a href="delivery.php">Delivery</a>
+      <a href="chatbox.php" class="active">Messages</a>
+      <a href="profile.php">Profile</a>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-chat-input">
+        <input id="navChatInput" type="text" placeholder="Ask chat...">
+        <button type="button" id="navChatButton">➤</button>
+      </div>
+      <button type="button" class="nav-button" id="navNotificationBtn">Notifications</button>
+      <a class="nav-button" href="logout.php">Logout</a>
+    </div>
+  </nav>
+  <section class="home-search">
+    <input id="homeSearchInput" type="text" placeholder="Search rentals, partners, or updates">
+    <button type="button" id="homeSearchBtn">Search</button>
+    <button type="button" class="home-search-chat" onclick="location.href='chatbox.php'">Messages</button>
+  </section>
+  <main class="container chat-layout">
+    <aside class="side-panel">
+      <h3>Admin Support</h3>
+      <p>Use this chat to connect directly with the admin for listing approval, questions, and updates.</p>
+      <div class="notification-list">
+        <h4>Support Status</h4>
+        <ul>
+          <li>Admin online<span>Now</span></li>
+          <li>Typical response<span>1-2 min</span></li>
+          <li>Open support hours<span>8am - 9pm</span></li>
+        </ul>
+      </div>
+    </aside>
+    <section class="chatbox chatbox-with-info">
+      <div class="chat-header">
+        <div class="chat-avatar">A</div>
+        <div class="chat-info">
+          <h2>Admin Messenger</h2>
+          <span>Chat directly with the support team</span>
+        </div>
+        <div class="chat-user-actions">
+          <span class="chat-user-name">You</span>
+          <button type="button" class="chat-action-button" onclick="location.href='profile.php'">My Profile</button>
+        </div>
+      </div>
+      <div class="chat-window">
+        <div class="message bot">
+          <div class="message-text">Hello! This is the admin support channel. How can we help you today?</div>
+        </div>
+        <div class="message user">
+          <div class="message-text">Hi, I need assistance with my new rental listing.</div>
+        </div>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <input type="text" placeholder="Type a message to admin..." aria-label="Message to admin" required>
+        <button type="submit">→</button>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
