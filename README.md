@@ -1,2 +1,2 @@
-# frontend
+# StyliCyle
 our website design
