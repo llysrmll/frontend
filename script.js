@@ -170,17 +170,17 @@ const listings = [
   {
     title: "Evening Gown",
     detail: "Perfect for formal events — ₱650/day",
-    image: "https://via.placeholder.com/160x160?text=Gown"
+    image: "evening.jpg"
   },
   {
     title: "Tuxedo Suit",
     detail: "Classic suit for weddings — ₱850/day",
-    image: "https://via.placeholder.com/160x160?text=Suit"
+    image: "tuxedo.jpg"
   },
   {
     title: "Bridal Gown",
     detail: "Elegant wedding dress — ₱1200/day",
-    image: "https://via.placeholder.com/160x160?text=Bridal"
+    image: "bridal.jpg"
   }
 ];
 
@@ -188,17 +188,17 @@ const profilePosts = [
   {
     title: "Silver Sequin Gown",
     detail: "Perfect for parties and evening events.",
-    image: "https://via.placeholder.com/320x220?text=Sequin+Gown"
+    image: "evening.jpg"
   },
   {
     title: "Black Tuxedo Suit",
     detail: "Sharp wedding and formal event attire.",
-    image: "https://via.placeholder.com/320x220?text=Tuxedo+Suit"
+    image: "tuxedo.jpg"
   },
   {
     title: "Ivory Bridal Gown",
     detail: "Elegant and timeless bridal choice.",
-    image: "https://via.placeholder.com/320x220?text=Bridal+Gown"
+    image: "bridal.jpg"
   }
 ];
 
@@ -434,6 +434,75 @@ chatPostItemBtn?.addEventListener("click", () => {
   window.location.href = "rental.html";
 });
 
+// Persistent help launcher available on every page.
+function setupFloatingChat() {
+  if (document.querySelector('.chat-launcher')) return;
+
+  const launcher = document.createElement('button');
+  launcher.type = 'button';
+  launcher.className = 'chat-launcher';
+  launcher.setAttribute('aria-label', 'Open support chat');
+  launcher.setAttribute('aria-expanded', 'false');
+  launcher.textContent = '💬';
+
+  const panel = document.createElement('section');
+  panel.className = 'floating-chat-panel';
+  panel.hidden = true;
+  panel.setAttribute('aria-label', 'Support chat');
+  panel.innerHTML = `
+    <div class="floating-chat-header">
+      <strong>StyliCycle Support</strong>
+      <button type="button" class="floating-chat-close" aria-label="Close support chat">×</button>
+    </div>
+    <div class="floating-chat-messages">
+      <div class="message bot"><span>Hi! How can we help with your rental today?</span></div>
+    </div>
+    <form class="floating-chat-form">
+      <input type="text" placeholder="Type a message..." aria-label="Support message" required>
+      <button type="submit" aria-label="Send support message">➤</button>
+    </form>
+  `;
+
+  document.body.append(launcher, panel);
+
+  const closeButton = panel.querySelector('.floating-chat-close');
+  const messages = panel.querySelector('.floating-chat-messages');
+  const form = panel.querySelector('.floating-chat-form');
+  const input = form.querySelector('input');
+
+  function togglePanel(isOpen) {
+    panel.hidden = !isOpen;
+    launcher.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) input.focus();
+  }
+
+  launcher.addEventListener('click', () => togglePanel(panel.hidden));
+  closeButton.addEventListener('click', () => togglePanel(false));
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user';
+    userMessage.textContent = text;
+    messages.appendChild(userMessage);
+    input.value = '';
+    messages.scrollTop = messages.scrollHeight;
+
+    window.setTimeout(() => {
+      const reply = document.createElement('div');
+      reply.className = 'message bot';
+      reply.textContent = 'Thanks! An admin will reply shortly.';
+      messages.appendChild(reply);
+      messages.scrollTop = messages.scrollHeight;
+    }, 500);
+  });
+}
+
+setupFloatingChat();
+
 // Delivery page functionality
 if (document.getElementById('deliveryForm')) {
   let map;
@@ -442,16 +511,34 @@ if (document.getElementById('deliveryForm')) {
   let pickupCoords = null;
   let deliveryCoords = null;
 
+  function showMapFallback() {
+    const fallback = document.getElementById('mapFallback');
+    if (fallback) fallback.hidden = false;
+  }
+
   function initMap() {
     // Default location (Manila, Philippines)
     const defaultLocation = [14.5995, 120.9842];
 
     map = L.map('map').setView(defaultLocation, 12);
 
+    // Browsers commonly block public tile requests when this page is opened from file://.
+    if (window.location.protocol === 'file:') {
+      showMapFallback();
+      marker = L.marker(defaultLocation, { draggable: true }).addTo(map);
+      return;
+    }
+
     // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    });
+    let tileErrors = 0;
+    tileLayer.on('tileerror', () => {
+      tileErrors += 1;
+      if (tileErrors >= 2) showMapFallback();
+    });
+    tileLayer.addTo(map);
 
     // Add a marker
     marker = L.marker(defaultLocation, { draggable: true }).addTo(map);
